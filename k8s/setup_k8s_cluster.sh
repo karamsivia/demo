@@ -11,7 +11,7 @@ function GetKubernetes {
     rm -rf $top_dir/k8s-$k8sVer/kubernetes
     rm -rf $top_dir/k8s-$k8sVer/bin
   else
-    cd $top_dir/k8s-$k8sVer 
+    cd $top_dir/k8s-$k8sVer
     wget https://github.com/kubernetes/kubernetes/releases/download/$k8sVer/kubernetes.tar.gz
   fi
 
@@ -60,7 +60,11 @@ username=$1
 : ${k8sVer:=v1.1.4}
 
 # contiv version
-: ${contivVer:=v0.1-02-09-2016.19-04-28.UTC}
+: ${contivVer:=v0.1-05-19-2016.08-34-56.UTC}
+echo "Using version: $contivVer"
+
+# contiv fwd mode - bridge or routing
+: ${contivFwdMode:=bridge}
 
 top_dir=$PWD
 
@@ -71,4 +75,4 @@ GetContiv
 ./parse_cluster.py $username
 
 # run ansible
-ansible-playbook -i .contiv_k8s_inventory $top_dir/contrib/ansible/cluster.yml --skip-tags "contiv_restart" -e "networking=contiv localBuildOutput=$top_dir/k8s-$k8sVer/kubernetes/server/bin contiv_bin_path=$top_dir/contiv_bin etcd_peers_group=masters"
+ansible-playbook -kK -i .contiv_k8s_inventory $top_dir/contrib/ansible/cluster.yml --skip-tags "contiv_restart,addons" -e "networking=contiv contiv_fwd_mode=$contivFwdMode localBuildOutput=$top_dir/k8s-$k8sVer/kubernetes/server/bin contiv_bin_path=$top_dir/contiv_bin etcd_peers_group=masters"

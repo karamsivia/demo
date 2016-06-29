@@ -67,6 +67,9 @@ class Inventory:
             self.writeInventoryEntry(outFd, 'APIC_URL')
             self.writeInventoryEntry(outFd, 'APIC_USERNAME')
             self.writeInventoryEntry(outFd, 'APIC_PASSWORD')
+            self.writeInventoryEntry(outFd, 'APIC_PHYS_DOMAIN')
+            self.writeInventoryEntry(outFd, 'APIC_EPG_BRIDGE_DOMAIN')
+            self.writeInventoryEntry(outFd, 'APIC_CONTRACTS_UNRESTRICTED_MODE')
 
             if self.configInfo['APIC_LEAF_NODES'] is 'missing':
                 self.handleMissing("APIC_LEAF_NODES", self.cfgFile, outFd);

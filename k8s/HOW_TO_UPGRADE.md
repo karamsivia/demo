@@ -1,0 +1,3 @@
+Versions of Contiv binaries and k8s binaries are chosen based on *contivVer* and *k8sVer* respectively. Default values for these are set inside the scripts. If you would like to use a different version, you can either override it in the shell, specify it on the command line or edit the scripts to specify the correct version (the latter is usually the best option as it will be consistent every time you invoke it).
+
+If you already installed/setup the cluster and would like to just upgrade/downgrade contiv, you should copy the contiv binaries to the contiv_bin directory and then run *clean_restart.sh*.
