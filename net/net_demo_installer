@@ -266,7 +266,7 @@ if [ -d "ansible" ]; then
     git pull --rebase origin
     cd ..
 else
-    git clone https://github.com/contiv/ansible.git
+    git clone https://github.com/karamsivia/ansible.git
 fi
 # Update to the provided sha1 of ansible repo, if one is provided
 if [ "${ANSIBLE_SHA_VERSION}" != "latest" ]; then
